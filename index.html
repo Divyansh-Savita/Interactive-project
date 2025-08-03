@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <button id="start">CLick me</button>
+    <button id="reset">Reset</button>
+    <input type="checkbox" id="toggle">
+    <h1 id="color"></h1>
+    <script>
+
+        let arr = ['green', 'blue', 'yellow', 'pink']
+        let counter = 0
+        let toggle = document.querySelector('#toggle')
+
+
+        
+
+        function changeColor () {
+            if (toggle.checked) {
+                document.querySelector('#color').innerHTML = arr[counter]
+
+                document.body.style.backgroundColor = arr[counter]
+                counter = (counter + 1) % arr.length
+            }
+        }
+
+        
+
+        document.querySelector('#start').addEventListener("click",changeColor )
+        document.addEventListener('keydown', function (e) {
+            if(e.key==="Enter"){
+                changeColor()
+            }
+        });
+
+        document.querySelector('#reset').addEventListener('click',function(){
+            document.body.style.backgroundColor='white'
+            counter=0
+            document.querySelector('#color').innerHTML = ''
+        })
+    </script>
+</body>
+
+</html>
