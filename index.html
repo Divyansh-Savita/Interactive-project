@@ -12,15 +12,20 @@
     <button id="reset">Reset</button>
     <input type="checkbox" id="toggle"><label for="toggle">Enable Color Cycle</label>
     <input type="checkbox" id="randomode"><label for="randomode">Random Color</label>
-    <input type="text" id="inputt">
+    <input type="text" id="inputt" placeholder="Enter a color">
+    <span id="color-feedback"></span>
     <button id="add-color">Add Color</button>
     <h1 id="color"></h1>
+    <button id="automodeON">Auto mode ON</button>
+    <button id="automodeOFF">Auto mode OFF</button>
     <script>
 
         let arr = ['green', 'blue', 'yellow', 'pink']
         let counter = 0
+
         let toggle = document.querySelector('#toggle')
         let Random = document.querySelector('#randomode')
+        let autoMode = document.querySelector('#automode')
 
         function changeColor() {
 
@@ -38,6 +43,18 @@
             }
         }
 
+        let interval
+        let startChangingColor=function(){
+            
+            let changer=()=>(document.body.style.backgroundColor=changeColor())
+            if(!interval){
+            interval= setInterval(changer,1000)
+            }
+        }
+        let stopChangingColor=()=>{
+            clearInterval(interval)
+            interval=null
+        }
 
 
         document.querySelector('#start').addEventListener("click", changeColor)
@@ -56,10 +73,30 @@
         document.querySelector('#add-color').addEventListener('click', function () {
             if (toggle.checked) {
                 let inputt = document.querySelector('#inputt').value.trim();
+                const feedback = document.querySelector('#color-feedback');
 
-                document.body.style.backgroundColor = inputt
+                // Validate color
+                const test = new Option().style;
+                test.color = '';
+                test.color = inputt;
+
+                if (test.color !== '') {
+                    // ✅ Valid color → Apply it
+                    document.body.style.backgroundColor = inputt;
+                    feedback.textContent = `✅ `;
+
+                } else {
+                    // ❌ Invalid color → Show error
+                    feedback.textContent = `❌ `;
+
+                }
             }
         })
+
+        document.querySelector('#automodeON').addEventListener('click', startChangingColor)
+        document.querySelector('#automodeOFF').addEventListener('click', stopChangingColor)
+
+
     </script>
 </body>
 
