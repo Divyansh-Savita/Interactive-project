@@ -2,6 +2,7 @@
       box-sizing: border-box;
       margin: 0;
       padding: 0;
+      color:#0599f5
     }
 
     body {
@@ -96,3 +97,48 @@
       background-color: #555;
     }
   
+    <style>
+    #fav-dropdown {
+        margin-top: 10px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        max-width: 250px;
+        background-color: #f9f9f9;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .fav-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 8px;
+        padding: 4px 6px;
+        background-color: white;
+        border-radius: 6px;
+        transition: 0.2s;
+    }
+
+    .fav-item:hover {
+        background-color: #eee;
+    }
+
+    .color-preview {
+        width: 24px;
+        height: 24px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        margin-right: 10px;
+    }
+
+    .color-name {
+        flex-grow: 1;
+    }
+
+    .delete-btn {
+        border: none;
+        background: none;
+        font-size: 16px;
+        cursor: pointer;
+        color: red;
+    }

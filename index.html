@@ -15,7 +15,7 @@
     <div class="sidebar" id="sidebar">
         <h2>-----------Color App-----</h2>
 
-        
+
         <button id="start">CLick me</button>
         <button id="reset">Reset</button>
         <input type="checkbox" id="toggle"><label for="toggle">Enable Color Cycle</label>
@@ -27,14 +27,20 @@
         <button id="automodeON">Auto mode ON</button>
         <button id="automodeOFF">Auto mode OFF</button>
         <hr>
-        <button id="fav">Favourite color</button>
 
+        <button id="fav">⭐ Save Favorite</button>
+        <button id="toggle-fav-dropdown">📂 Favorite Colors</button>
+
+        <div id="fav-dropdown" style="display: none;">
+            <div id="favorites-list"></div>
         </div>
-        
-        <div class="main-content" id="mainContent">
-            <h1 id="color">Color will appear here</h1>
-        </div>
-        <script src="script.js"></script>
+
+    </div>
+
+    <div class="main-content" id="mainContent">
+        <h1 id="color">Color will appear here</h1>
+    </div>
+    <script src="script.js"></script>
 </body>
 
 </html>

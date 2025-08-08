@@ -84,3 +84,80 @@ toggleSidebarBtn.addEventListener('click', () => {
     mainContent.classList.toggle('expanded');
 });
 
+
+// Toggle dropdown
+document.getElementById("toggle-fav-dropdown").addEventListener("click", () => {
+    const dropdown = document.getElementById("fav-dropdown");
+    dropdown.style.display = dropdown.style.display === "none" ? "block" : "none";
+    
+});
+
+// Get from localStorage
+function getFavorites() {
+    return JSON.parse(localStorage.getItem("favColors")) || [];
+}
+
+// Save to localStorage
+function setFavorites(colors) {
+    localStorage.setItem("favColors", JSON.stringify(colors));
+}
+
+// Render favorite colors in dropdown
+function showFavorites() {
+    const container = document.getElementById("favorites-list");
+    const favColors = getFavorites();
+    container.innerHTML = "";
+
+    favColors.forEach((color, index) => {
+        const item = document.createElement("div");
+        item.className = "fav-item";
+
+        const preview = document.createElement("div");
+        preview.className = "color-preview";
+        preview.style.backgroundColor = color;
+
+        const name = document.createElement("span");
+        name.className = "color-name";
+        name.textContent = color;
+
+        // ✅ Change background on click
+        item.addEventListener('click', () => {
+            document.body.style.backgroundColor = color;
+            const colorText = document.getElementById("color");
+            if (colorText) colorText.textContent = color;
+        });
+
+        const del = document.createElement("button");
+        del.className = "delete-btn";
+        del.textContent = "❌";
+        del.onclick = (e) => {
+            e.stopPropagation(); // Prevent triggering the background color change
+            const newColors = getFavorites();
+            newColors.splice(index, 1);
+            setFavorites(newColors);
+            showFavorites();
+        };
+
+        item.appendChild(preview);
+        item.appendChild(name);
+        item.appendChild(del);
+
+        container.appendChild(item);
+    });
+}
+
+// Save current background color
+document.getElementById("fav").addEventListener("click", () => {
+    const currentColor = document.body.style.backgroundColor;
+    if (!currentColor) return;
+
+    const favColors = getFavorites();
+    if (!favColors.includes(currentColor)) {
+        favColors.push(currentColor);
+        setFavorites(favColors);
+        showFavorites();
+    }
+});
+
+// Load favorites on page load
+showFavorites();
